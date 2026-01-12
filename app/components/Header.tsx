@@ -22,12 +22,12 @@ export default function Header() {
           <div className=" bg-slate-900 dark:bg-white dark:text-slate-900 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-sm">
            
             {mounted && (
-            theme === 'dark' ? (
-              <Image src="/images/vectordark.png" alt="Logo" width={15} height={15}   />
-            ) : (
-              <Image src="/images/vector.png" alt="Logo" width={15} height={15}   />
-            )
-          )}
+              theme === 'dark' ? (
+                <Image src="/images/vectordark.png" alt="Logo" width={15} height={15}   />
+              ) : (
+                <Image src="/images/vectorlight.png" alt="Logo" width={15} height={15}   />
+              )
+            )}
           </div>
           <div className="flex flex-col justify-center">
             <h1 className="text-sm font-bold dark:text-white  text-[#111827] leading-tight">

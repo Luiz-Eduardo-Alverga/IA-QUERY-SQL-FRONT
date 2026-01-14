@@ -13,20 +13,10 @@ interface TableDialogContentProps {
 
 export default function TablesDialogContent({ mounted }: TableDialogContentProps) {
   const {theme} = useTheme()
-  const { data, isLoading, error } = useQuery({
+  const { data,  error } = useQuery({
     queryKey: ['tables'],
     queryFn: getTables,
   });
-
-  if (isLoading) {
-    return (
-      <div className="p-6">
-        <div className="flex items-center justify-center py-12">
-          <div className="text-sm text-gray-500 dark:text-gray-400">Carregando tabelas...</div>
-        </div>
-      </div>
-    );
-  }
 
   if (error) {
     return (

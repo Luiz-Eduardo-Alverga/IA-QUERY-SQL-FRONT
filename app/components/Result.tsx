@@ -1,5 +1,6 @@
 'use client';
 
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useState } from 'react';
 
 interface QueryResult {
@@ -53,6 +54,29 @@ export default function Result({ result, isLoading, error }: ResultProps) {
       } catch (err) {
         console.error('Erro ao copiar:', err);
       }
+    }
+  };
+
+  const getConfidenceInfo = (confidence: number) => {
+    const percentage = confidence * 100;
+
+    console.log(percentage);
+    
+    if (percentage >= 95) {
+      return {
+        text: '95% ou superior: Alta certeza de que o SQL é válido e os nomes das tabelas existem no schema.',
+        textColor: '#00A63E'
+      };
+    } else if (percentage >= 50 && percentage <= 95) {
+      return {
+        text: '50 a 95%: A instrução pode ter sido ambígua ou o modelo precisou fazer alguma suposição para completar a tarefa',
+        textColor: '#D08700'
+      };
+    } else {
+      return {
+        text: 'Menor que 50%: Alerta de revisão humana antes de executar no banco de dados.',
+        textColor: '#CA060A'
+      };
     }
   };
 
@@ -163,9 +187,34 @@ export default function Result({ result, isLoading, error }: ResultProps) {
         <div className="flex items-center gap-2">
           <i className="fa-solid fa-arrow-trend-up text-gray-400 dark:text-gray-500 text-xs"></i>
           <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">Confiança:</span>
-          <span className="inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-bold bg-green-100 dark:bg-success-light text-green-700 dark:text-success border border-green-200 dark:border-green-800">
-            {(result.confidence * 100).toFixed(0)}%
-          </span>
+          <Tooltip>
+            <TooltipTrigger>
+              <span className="inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-bold bg-green-100 dark:bg-success-light text-green-700 dark:text-success border border-green-200 dark:border-green-800">
+                {(result.confidence * 100).toFixed(0)}%
+              </span> 
+            </TooltipTrigger>
+            <TooltipContent
+                className="bg-[#0A0A0A] dark:bg-[#FAFAFA] border-0 flex flex-col gap-2 p-3 max-w-[230px] [&>svg]:bg-[#0A0A0A] [&>svg]:dark:bg-[#FAFAFA] [&>svg]:fill-[#0A0A0A] [&>svg]:dark:fill-[#FAFAFA]"
+              >
+                <p className="font-bold text-[10px] uppercase tracking-wider text-white dark:text-black">
+                  Nível de Confiança:
+                </p>
+                
+                {(() => {
+                  const info = getConfidenceInfo(result.confidence);
+                  const [range, description] = info.text.split(':'); // Separa a string no caractere ':'
+
+                  return (
+                    <span>
+                      <span style={{ color: info.textColor }}>{range}:
+                      </span>
+                      <span className=" text-white leading-tight dark:text-black"><span>  </span>{description.trim()}</span>
+                    </span>
+
+                  );
+                })()}
+              </TooltipContent>
+          </Tooltip>
         </div>
         <div className="flex items-center gap-2">
           <i className="fa-regular fa-clock text-gray-400 dark:text-gray-500 text-xs"></i>

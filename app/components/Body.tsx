@@ -16,7 +16,7 @@ export default function Body() {
   };
 
   return (
-    <main className="flex-1 overflow-y-auto bg-surface-primary dark:bg-surface-primary mt-16">
+    <main className="flex-1 overflow-y-auto bg-[#F9FAFB] dark:bg-[#0F172A] mt-16">
       <div className="max-w-4xl mx-auto px-6 py-12 flex flex-col gap-8">
         <Title />
         <SearchInput onSubmit={handleSearch} isLoading={isPending} />

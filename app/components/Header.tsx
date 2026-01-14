@@ -22,7 +22,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="dark:bg-surface-card bg-white border-b dark:border-surface-card h-16 fixed top-0 left-0 right-0 z-50 w-full">
+    <header className="bg-white dark:bg-[#1B2538] border-b border-gray-200 dark:border-[#1B2538] h-16 fixed top-0 left-0 right-0 z-50 w-full">
       <div className="w-full h-full px-6 flex items-center justify-between">
         {/* Left: Logo & Title */}
         <div className="flex items-center gap-3">
@@ -36,7 +36,7 @@ export default function Header() {
             )}
           </div>
           <div className="flex flex-col justify-center">
-            <h1 className="text-sm font-bold dark:text-white text-text-primary-dark leading-tight">
+            <h1 className="text-sm font-bold dark:text-white text-[#111827] leading-tight">
               Arquiteto de Consultas
             </h1>
             <span className="text-xs text-gray-400 font-light">
@@ -58,7 +58,7 @@ export default function Header() {
 
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="bg-slate-100 text-slate-900 dark:bg-surface-primary dark:text-white hover:bg-slate-200 dark:hover:bg-surface-primary/80">
+              <Button className="bg-slate-100 text-slate-900 dark:bg-[#0F172A] dark:text-white hover:bg-slate-200 dark:hover:bg-[#0F172A]/80">
                 <Table className="w-4 h-4" />
                 <span className="text-xs">Tabelas Mapeadas</span>
               </Button>

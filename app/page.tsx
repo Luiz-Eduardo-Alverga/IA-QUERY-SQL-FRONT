@@ -5,7 +5,7 @@ import Body from "./components/Body";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-surface-primary dark:bg-surface-primary overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#F9FAFB] dark:bg-[#0F172A] overflow-hidden">
       <Header />
       <Body />
     </div>

@@ -42,13 +42,13 @@ export default function TablesDialogContent({ mounted }: TableDialogContentProps
   const count = data?.count || 0;
 
   return (
-    <DialogContent className='dark:bg-surface-card bg-white sm:max-w-[500px] max-h-[90vh] overflow-auto'>
+    <DialogContent className='dark:bg-[#1B2538] bg-white dark:border-[#1B2538] border-gray-200 sm:max-w-[500px] max-h-[90vh] overflow-auto'>
       <div className="w-full max-w-[500px]">
         {/* Header */}
         <DialogTitle className="flex justify-between items-center mb-2">
           <div className="flex items-center gap-2.5">
-            <Table className="w-6 h-6 text-text-primary-dark dark:text-white" />
-            <span className="text-xl font-bold text-text-primary-dark dark:text-white">
+            <Table className="w-6 h-6 text-[#111827] dark:text-white" />
+            <span className="text-xl font-bold text-[#111827] dark:text-white">
               Tabelas Mapeadas
             </span>
           </div>
@@ -71,7 +71,7 @@ export default function TablesDialogContent({ mounted }: TableDialogContentProps
                 key={table.name}
                 className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 mb-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/50"
               >
-                <span className="font-bold text-sm block mb-1 text-text-primary-dark dark:text-white">
+                <span className="font-bold text-sm block mb-1 text-[#111827] dark:text-white">
                   {table.name}
                 </span>
                 <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -85,7 +85,7 @@ export default function TablesDialogContent({ mounted }: TableDialogContentProps
         {/* Footer */}
         <div className="mt-5 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center text-sm">
           <div className="text-gray-500 dark:text-gray-400">
-            Total de tabelas: <b className="text-text-primary-dark dark:text-white">{count}</b>
+            Total de tabelas: <b className="text-[#111827] dark:text-white">{count}</b>
           </div>
           
           {mounted && (

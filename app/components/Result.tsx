@@ -47,7 +47,7 @@ export default function Result({ result, isLoading, error }: ResultProps) {
   const handleCopy = async () => {
     if (result?.sql) {
       try {
-        await navigator.clipboard.writeText(result.sql);
+        await navigator.clipboard.writeText(formatSQL(result.sql));
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch (err) {
@@ -91,9 +91,9 @@ export default function Result({ result, isLoading, error }: ResultProps) {
   }
 
   return (
-    <section className="bg-white dark:bg-[#1B2538] rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.3)] border border-gray-200 dark:border-[#1B2538] overflow-hidden mb-12">
+    <section className="bg-white dark:bg-surface-card rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.3)] border border-gray-200 dark:border-surface-card overflow-hidden mb-12">
       {/* Card Header */}
-      <div className="px-8 py-6 dark:bg-[#13182A]  border-b border-gray-200 dark:border-[#1B2538]">
+      <div className="px-8 py-6 dark:bg-surface-card-header  border-b border-gray-200 dark:border-surface-card">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white">Resultado</h3>
       </div>
 
@@ -119,16 +119,16 @@ export default function Result({ result, isLoading, error }: ResultProps) {
           </span>
         </div>
 
-        <div className="bg-[#F8FAFC] dark:bg-gray-900 border border-gray-200 dark:border-[#1B2538] rounded-lg overflow-hidden">
+        <div className="bg-surface-code dark:bg-gray-900 border border-gray-200 dark:border-surface-card rounded-lg overflow-hidden">
           {/* Code Header */}
-          <div className="flex items-center justify-between px-4 py-2 bg-[#F1F5F9] dark:bg-[#0E1727]">
+          <div className="flex items-center justify-between px-4 py-2 bg-surface-card-header dark:bg-surface-code">
             <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">SQL Query</span>
             <button
               onClick={handleCopy}
               className={`flex items-center gap-1.5 text-xs font-medium border px-2 py-1.5 rounded shadow-sm transition-all ${
                 copied
-                  ? 'text-green-600 border-green-200 bg-green-50 dark:text-[#059669] dark:border-green-800 dark:bg-[#D1FAE5]'
-                  : 'text-gray-900 hover:text-gray-800 dark:text-white dark:hover:text-gray-200 bg-white hover:bg-gray-50 dark:bg-transparent dark:hover:bg-gray-700 border-gray-200 dark:border-[#1B2538]'
+                  ? 'text-green-600 border-green-200 bg-green-50 dark:text-success dark:border-green-800 dark:bg-success-light'
+                  : 'text-gray-900 hover:text-gray-800 dark:text-white dark:hover:text-gray-200 bg-white hover:bg-gray-50 dark:bg-transparent dark:hover:bg-gray-700 border-gray-200 dark:border-surface-card'
               }`}
             >
               {copied ? (
@@ -147,7 +147,7 @@ export default function Result({ result, isLoading, error }: ResultProps) {
 
           {/* Code Content */}
           <div className="p-5 overflow-x-auto">
-            <pre className="font-mono text-sm leading-6 text-gray-800 dark:text-gray-200 dark:bg-[#0F172A]">
+            <pre className="font-mono text-sm leading-6 text-gray-800 dark:text-gray-200 dark:bg-surface-primary">
               <code
                 dangerouslySetInnerHTML={{
                   __html: highlightSQL(result.sql),
@@ -159,11 +159,11 @@ export default function Result({ result, isLoading, error }: ResultProps) {
       </div>
 
       {/* Footer Stats */}
-      <div className="px-8 py-4 bg-gray-50 dark:bg-[#0E1727] border-t border-gray-100 dark:border-gray-700 flex items-center gap-6 flex-wrap">
+      <div className="px-8 py-4 bg-gray-50 dark:bg-surface-code border-t border-gray-100 dark:border-gray-700 flex items-center gap-6 flex-wrap">
         <div className="flex items-center gap-2">
           <i className="fa-solid fa-arrow-trend-up text-gray-400 dark:text-gray-500 text-xs"></i>
           <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">Confiança:</span>
-          <span className="inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-bold bg-green-100 dark:bg-[#D1FAE5] text-green-700 dark:text-[#059669] border border-green-200 dark:border-green-800">
+          <span className="inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-bold bg-green-100 dark:bg-success-light text-green-700 dark:text-success border border-green-200 dark:border-green-800">
             {(result.confidence * 100).toFixed(0)}%
           </span>
         </div>

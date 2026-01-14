@@ -26,7 +26,7 @@ export default function ThemeToggle() {
     <Button
       onClick={toggleTheme}
       variant={'link'}
-      className="w-8 h-8  bg-slate-100  dark:bg-[#0F172A] dark:text-white"
+      className="w-8 h-8 bg-slate-100 text-slate-900 dark:bg-surface-primary dark:text-white hover:bg-slate-200 dark:hover:bg-surface-primary/80"
       aria-label="Toggle theme"
     >
 

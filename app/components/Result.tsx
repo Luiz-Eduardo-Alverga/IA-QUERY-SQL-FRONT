@@ -1,5 +1,6 @@
 'use client';
 
+import { Skeleton } from '@/components/ui/skeleton';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useState } from 'react';
 
@@ -59,8 +60,6 @@ export default function Result({ result, isLoading, error }: ResultProps) {
 
   const getConfidenceInfo = (confidence: number) => {
     const percentage = confidence * 100;
-
-    console.log(percentage);
     
     if (percentage >= 95) {
       return {
@@ -87,10 +86,10 @@ export default function Result({ result, isLoading, error }: ResultProps) {
           <h3 className="text-lg font-bold text-gray-900 dark:text-white">Resultado</h3>
         </div>
         <div className="px-8 py-12">
-          <div className="animate-pulse space-y-4">
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></div>
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+          <div className="space-y-4">
+            <Skeleton className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></Skeleton>
+            <Skeleton className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></Skeleton>
+            <Skeleton className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></Skeleton>
           </div>
         </div>
       </section>

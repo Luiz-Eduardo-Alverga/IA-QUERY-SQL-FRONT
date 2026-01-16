@@ -6,27 +6,23 @@ import { Table } from "lucide-react";
 import { DialogTitle, DialogContent} from '@/components/ui/dialog';
 import Image from "next/image";
 import { useTheme } from 'next-themes';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface TableDialogContentProps {
   mounted: boolean;
+  isTablesDialogOpen: boolean;
+  setIsTablesDialogOpen?: (isTablesDialogOpen: boolean) => void;
 }
 
-export default function TablesDialogContent({ mounted }: TableDialogContentProps) {
+export default function TablesDialogContent({ mounted, isTablesDialogOpen }: TableDialogContentProps) {
   const {theme} = useTheme()
-  const { data,  error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['tables'],
     queryFn: getTables,
+    enabled: isTablesDialogOpen,
   });
 
-  if (error) {
-    return (
-      <div className="p-6">
-        <div className="flex items-center justify-center py-12">
-          <div className="text-sm text-red-500">Erro ao carregar tabelas</div>
-        </div>
-      </div>
-    );
-  }
+  
 
   const tables = data?.tables || [];
   const count = data?.count || 0;
@@ -49,11 +45,18 @@ export default function TablesDialogContent({ mounted }: TableDialogContentProps
           Lista de tabelas disponíveis para geração de consultas SQL
         </div>
 
-        {/* Table List */}
-        <div className="max-h-[400px] overflow-y-auto pr-2 mb-5">
-          {tables.length === 0 ? (
+        {isLoading ? (
+          Array.from({ length: 5 }).map((_, index) => (
+            <Skeleton
+              key={index}
+              className="w-full h-16 mb-3"
+            />
+          ))  
+        ): (
+          <div className="max-h-[400px] overflow-y-auto pr-2 mb-5">
+          {tables && tables.length === 0 ? (
             <div className="text-center py-8 text-sm text-gray-500 dark:text-gray-400">
-              Nenhuma tabela encontrada
+             Erro ao buscar tabelas
             </div>
           ) : (
             tables.map((table) => (
@@ -71,13 +74,19 @@ export default function TablesDialogContent({ mounted }: TableDialogContentProps
             ))
           )}
         </div>
-
+        )}
+        
         {/* Footer */}
         <div className="mt-5 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center text-sm">
           <div className="text-gray-500 dark:text-gray-400">
-            Total de tabelas: <b className="text-[#111827] dark:text-white">{count}</b>
+
+            {isLoading ? 
+                <Skeleton className="w-16 h-4" /> 
+            :
+                <span className="text-[#111827] dark:text-white">Total de tabelas: : <b>{count}</b></span>
+            }
           </div>
-          
+
           {mounted && (
             theme === 'dark' ? (
               <Image src="/images/logotemadark.svg" alt="Softcom Logo" width={150} height={30} />

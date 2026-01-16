@@ -15,6 +15,7 @@ import TablesDialogContent from "./TablesDialogContent";
 export default function Header() {
   const {theme} = useTheme()
   const [mounted, setMounted] = useState(false);
+  const [isTablesDialogOpen, setIsTablesDialogOpen] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -56,7 +57,7 @@ export default function Header() {
 
           <ThemeToggle />
 
-          <Dialog>
+          <Dialog open={isTablesDialogOpen} onOpenChange={setIsTablesDialogOpen}>
             <DialogTrigger asChild>
               <Button className="bg-slate-100 text-slate-900 dark:bg-[#0F172A] dark:text-white hover:bg-slate-200 dark:hover:bg-[#0F172A]/80">
                 <Table className="w-4 h-4" />
@@ -64,7 +65,7 @@ export default function Header() {
               </Button>
             </DialogTrigger>
 
-            <TablesDialogContent mounted={mounted} />
+            <TablesDialogContent isTablesDialogOpen={isTablesDialogOpen} setIsTablesDialogOpen={setIsTablesDialogOpen} mounted={mounted} />
           </Dialog>
         </div>
         

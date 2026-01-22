@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arquiteto de Consultas",
+  title: "Softquery",
   description: "Transforme suas perguntas em consultas SQL de forma inteligente",
 };
 

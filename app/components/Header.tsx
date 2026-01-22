@@ -37,7 +37,7 @@ export default function Header() {
           </div>
           <div className="flex flex-col justify-center">
             <h1 className="text-sm font-bold dark:text-white text-[#111827] leading-tight">
-              Arquiteto de Consultas
+              Softquery
             </h1>
             <span className="text-xs text-gray-400 font-light">
               Simplificando o acesso a dados para o suporte Softcom
